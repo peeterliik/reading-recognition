@@ -7,9 +7,11 @@ db = client.water_meter
 
 readings = db.readings
 
-reading = {
-    "value": 78123,
-    "time": datetime.datetime.utcnow()
-}
 
-post_id = readings.insert_one(reading).inserted_id
+def insert_reading(reading):
+    inserted_reading = {
+        "value": reading,
+        "time": datetime.datetime.utcnow()
+    }
+    post_id = readings.insert_one(inserted_reading).inserted_id
+    return post_id

@@ -1,16 +1,11 @@
-from qt_gl_preview import *
-from picamera2 import *
-import time
+from time import sleep
+from picamera import PiCamera
 
-picam2 = Picamera2()
-preview = QtGlPreview(picam2)
-preview_config = picam2.preview_configuration()
-capture_config = picam2.still_configuration()
-picam2.configure(preview_config)
+camera = PiCamera()
+camera.resolution = (1024, 768)
 
 
-def take_picture(n):
-    picname = "capture"+n+".jpg"
-    picam2.start()
-    time.sleep(2)
-    picam2.switch_mode_and_capture_file(capture_config, picname)
+def take_picture(picname):
+    camera.start_preview()
+    sleep(2)
+    camera.capture(picname)
